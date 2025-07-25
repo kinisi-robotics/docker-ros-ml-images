@@ -219,7 +219,6 @@ RUN if [[ $BASE_IMAGE_TYPE == "-tensorrt" && $TARGETARCH == "arm64" && $UBUNTU_V
         apt-get install -y cudnn9-cuda-12-6 && \
         rm -rf /var/lib/apt/lists/*; \
     fi
-
 # install PyTorch
 ARG TORCH_VERSION
 RUN if [[ -n $TORCH_VERSION ]]; then \
@@ -231,7 +230,8 @@ RUN if [[ -n $TORCH_VERSION ]]; then \
             # from: https://forums.developer.nvidia.com/t/pytorch-for-jetson/72048
             # and: https://docs.nvidia.com/deeplearning/frameworks/install-pytorch-jetson-platform/index.html#prereqs-install
             apt-get update && \
-            apt-get install -y libopenblas-base libopenmpi-dev libomp-dev && \
+            # apt-get install -y libopenblas-base libopenmpi-dev libomp-dev && \
+            apt-get install -y libopenmpi-dev libomp-dev && \
             rm -rf /var/lib/apt/lists/* && \
             wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/${TARGETARCH}/cuda-keyring_1.1-1_all.deb && \
             dpkg -i cuda-keyring_1.1-1_all.deb && \
